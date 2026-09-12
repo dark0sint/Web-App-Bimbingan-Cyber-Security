@@ -1,0 +1,28 @@
+<%- include('../partials/header') %>
+
+<a href="/mentor/forum" class="back-link">&larr; Kembali ke Forum</a>
+<h1 class="page-title"><%= thread.title %></h1>
+<div class="thread-meta">oleh <%= thread.author_name %> · <span class="chip chip-sm"><%= thread.category %></span></div>
+
+<div class="reply-list">
+  <% replies.forEach(r => { %>
+    <div class="reply-card <%= r.is_mentor_answer ? 'reply-mentor' : '' %>">
+      <div class="reply-head">
+        <strong><%= r.author_name %></strong>
+        <% if (r.is_mentor_answer) { %><span class="badge badge-mentor">Mentor</span><% } %>
+        <span class="reply-role"><%= r.author_role %></span>
+      </div>
+      <p><%= r.content %></p>
+    </div>
+  <% }) %>
+</div>
+
+<div class="card form-card">
+  <h3>Tulis Balasan</h3>
+  <form method="POST" action="/mentor/forum/<%= thread.id %>/reply">
+    <textarea name="content" rows="3" required placeholder="Tulis balasan Anda..."></textarea>
+    <button type="submit" class="btn btn-primary">Kirim Balasan</button>
+  </form>
+</div>
+
+<%- include('../partials/footer') %>

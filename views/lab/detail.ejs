@@ -1,0 +1,66 @@
+<%- include('../partials/header') %>
+
+<a href="/lab" class="back-link">&larr; Kembali ke Lab Praktik</a>
+
+<div class="lab-detail-head">
+  <h1 class="page-title"><%= lab.title %> <% if (solved) { %><span class="badge badge-success">✅ Solved</span><% } %></h1>
+  <div class="lab-tags">
+    <span class="diff-badge diff-<%= lab.difficulty %>"><%= lab.difficulty %></span>
+    <span class="chip">📁 <%= lab.category %></span>
+    <span class="chip">🏆 <%= lab.points %> poin</span>
+  </div>
+</div>
+
+<div class="lab-layout">
+  <div class="lab-info-col">
+    <div class="card">
+      <h3>📋 Deskripsi</h3>
+      <p><%= lab.description %></p>
+    </div>
+    <div class="card">
+      <h3>🧭 Briefing</h3>
+      <p><%= lab.briefing %></p>
+    </div>
+    <% if (lab.tool_hint) { %>
+    <div class="card hint-card">
+      <h3>🛠️ Hint Tool</h3>
+      <code><%= lab.tool_hint %></code>
+    </div>
+    <% } %>
+
+    <% if (message) { %>
+      <div class="alert alert-<%= message.type === 'success' ? 'success' : 'danger' %>"><%= message.text %></div>
+    <% } %>
+
+    <div class="card">
+      <h3>🚩 Submit Flag</h3>
+      <form method="POST" action="/lab/<%= lab.id %>/submit">
+        <input type="text" name="flag" placeholder="SSI{...}" required class="flag-input">
+        <button type="submit" class="btn btn-primary btn-block">Kirim Flag</button>
+      </form>
+      <p class="muted small">Percobaan sejauh ini: <%= attempts %></p>
+    </div>
+  </div>
+
+  <div class="lab-terminal-col">
+    <div class="terminal-window">
+      <div class="terminal-bar">
+        <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+        <span class="terminal-title">sandbox@shadow-security: ~</span>
+      </div>
+      <div class="terminal-body" id="terminalOutput"></div>
+      <div class="terminal-input-row">
+        <span class="prompt">$</span>
+        <input type="text" id="terminalInput" autocomplete="off" placeholder="ketik 'help' untuk daftar perintah">
+      </div>
+    </div>
+    <p class="muted small">💡 Terminal ini adalah simulasi sandbox yang aman — tidak terhubung ke sistem nyata manapun.</p>
+  </div>
+</div>
+
+<script>
+  window.LAB_SCENARIO = <%- JSON.stringify(scenario) %>;
+</script>
+<script src="/js/terminal.js"></script>
+
+<%- include('../partials/footer') %>

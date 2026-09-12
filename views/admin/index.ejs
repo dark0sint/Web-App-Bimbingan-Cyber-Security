@@ -1,0 +1,21 @@
+<%- include('../partials/header') %>
+
+<h1 class="page-title">⚙️ Panel Admin</h1>
+
+<div class="stat-cards">
+  <div class="stat-card"><div class="stat-value"><%= counts.users %></div><div class="stat-label">Total Pengguna</div></div>
+  <div class="stat-card"><div class="stat-value"><%= counts.paths %></div><div class="stat-label">Learning Path</div></div>
+  <div class="stat-card"><div class="stat-value"><%= counts.modules %></div><div class="stat-label">Modul</div></div>
+  <div class="stat-card"><div class="stat-value"><%= counts.labs %></div><div class="stat-label">Lab CTF</div></div>
+  <div class="stat-card"><div class="stat-value"><%= counts.reviewsPending %></div><div class="stat-label">Review Pending</div></div>
+</div>
+
+<div class="admin-menu">
+  <a href="/admin/users" class="admin-menu-item">👥 Kelola Pengguna</a>
+  <a href="/admin/paths" class="admin-menu-item">🗺️ Kelola Learning Path</a>
+  <a href="/admin/modules" class="admin-menu-item">📚 Kelola Modul</a>
+  <a href="/admin/labs" class="admin-menu-item">🧪 Kelola Lab CTF</a>
+  <a href="/mentor/reviews" class="admin-menu-item">🔍 Lihat Semua Review</a>
+</div>
+
+<%- include('../partials/footer') %>

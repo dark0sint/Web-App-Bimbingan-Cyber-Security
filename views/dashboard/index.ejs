@@ -1,0 +1,83 @@
+<%- include('../partials/header') %>
+
+<h1 class="page-title">📊 Dashboard Progress — Halo, <%= user.name %>!</h1>
+
+<div class="stat-cards">
+  <div class="stat-card">
+    <div class="stat-value"><%= stats.completedModules %>/<%= stats.totalModules %></div>
+    <div class="stat-label">Modul Selesai</div>
+    <div class="progress-bar"><div class="progress-fill" style="width:<%= stats.modulePercent %>%"></div></div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-value"><%= stats.solvedLabs %>/<%= stats.totalLabs %></div>
+    <div class="stat-label">Lab CTF Terselesaikan</div>
+    <div class="progress-bar"><div class="progress-fill progress-alt" style="width:<%= stats.labPercent %>%"></div></div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-value"><%= stats.totalPoints %></div>
+    <div class="stat-label">Total Poin Lab</div>
+  </div>
+</div>
+
+<div class="dashboard-grid">
+  <div class="dash-col">
+    <h2 class="section-title-sm">🎯 Peta Kompetensi (Skill Gap)</h2>
+    <div class="card">
+      <% if (skillGaps.length === 0) { %>
+        <p class="muted">Belum ada data skill.</p>
+      <% } %>
+      <% skillGaps.forEach(s => { %>
+        <div class="skill-row">
+          <span class="skill-name"><%= s.name %></span>
+          <div class="progress-bar small">
+            <div class="progress-fill <%= s.score < 40 ? 'progress-danger' : s.score < 70 ? 'progress-warning' : 'progress-success' %>" style="width:<%= s.score %>%"></div>
+          </div>
+          <span class="skill-score"><%= s.score %>%</span>
+        </div>
+      <% }) %>
+    </div>
+
+    <h2 class="section-title-sm">💡 Rekomendasi Belajar Otomatis</h2>
+    <div class="card">
+      <% if (recommendations.length === 0) { %>
+        <p class="muted">Mantap! Semua kompetensi sudah dikuasai dengan baik. 🎉</p>
+      <% } %>
+      <ul class="rec-list">
+        <% recommendations.forEach(r => { %>
+          <li>
+            <a href="/learning/module/<%= r.id %>"><strong><%= r.title %></strong></a>
+            <div class="rec-meta"><%= r.path_title %> <% if (r.skill_name) { %> · Skill: <%= r.skill_name %><% } %></div>
+          </li>
+        <% }) %>
+      </ul>
+    </div>
+  </div>
+
+  <div class="dash-col">
+    <h2 class="section-title-sm">🕓 Aktivitas Lab Terbaru</h2>
+    <div class="card">
+      <% if (recentLabActivity.length === 0) { %>
+        <p class="muted">Belum ada aktivitas lab. Yuk coba <a href="/lab">Lab Praktik</a>!</p>
+      <% } %>
+      <ul class="activity-list">
+        <% recentLabActivity.forEach(a => { %>
+          <li>
+            <span class="<%= a.is_correct ? 'badge badge-success' : 'badge badge-muted' %>"><%= a.is_correct ? 'Solved' : 'Attempt' %></span>
+            <%= a.title %> <% if (a.is_correct) { %><span class="pts">+<%= a.points %> pts</span><% } %>
+          </li>
+        <% }) %>
+      </ul>
+    </div>
+
+    <h2 class="section-title-sm">🏆 Papan Peringkat</h2>
+    <div class="card">
+      <ol class="leaderboard">
+        <% leaderboard.forEach((l, i) => { %>
+          <li><span class="rank">#<%= i+1 %></span> <%= l.name %> <span class="pts"><%= l.total_points %> pts</span></li>
+        <% }) %>
+      </ol>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>

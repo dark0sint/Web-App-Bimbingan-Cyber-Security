@@ -1,0 +1,20 @@
+<%- include('../partials/header') %>
+
+<a href="/mentor/live-classes" class="back-link">&larr; Kembali</a>
+<h1 class="page-title">🎥 Buat Kelas Live Baru</h1>
+
+<div class="card form-card">
+  <form method="POST" action="/mentor/live-classes/new">
+    <label>Judul Kelas</label>
+    <input type="text" name="title" required placeholder="Contoh: Studi Kasus Ransomware">
+    <label>Deskripsi</label>
+    <textarea name="description" rows="3" placeholder="Jelaskan topik yang akan dibahas"></textarea>
+    <label>Jadwal</label>
+    <input type="datetime-local" name="scheduled_at" required>
+    <label>Link Meeting</label>
+    <input type="url" name="meeting_link" placeholder="https://meet.google.com/xxx">
+    <button type="submit" class="btn btn-primary btn-block">Simpan Kelas</button>
+  </form>
+</div>
+
+<%- include('../partials/footer') %>

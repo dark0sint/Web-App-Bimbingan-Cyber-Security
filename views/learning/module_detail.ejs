@@ -1,0 +1,40 @@
+<%- include('../partials/header') %>
+
+<a href="/learning/<%= path.id %>" class="back-link">&larr; Kembali ke <%= path.title %></a>
+<h1 class="page-title"><%= module.title %></h1>
+
+<div class="card content-card">
+  <p><%= module.content %></p>
+</div>
+
+<% if (result) { %>
+  <div class="alert <%= result.isCorrect ? 'alert-success' : 'alert-danger' %>">
+    <%= result.isCorrect ? '✅ Jawaban benar! Modul ditandai selesai.' : '❌ Jawaban kurang tepat, tapi modul tetap ditandai selesai. Coba pelajari ulang materinya.' %>
+  </div>
+<% } %>
+
+<% if (module.quiz_question) { %>
+  <div class="card quiz-card">
+    <h3>📝 Kuis Pemahaman</h3>
+    <form method="POST" action="/learning/module/<%= module.id %>/quiz">
+      <p class="quiz-question"><%= module.quiz_question %></p>
+      <% options.forEach((opt, i) => { %>
+        <label class="quiz-option">
+          <input type="radio" name="answer" value="<%= i %>" required>
+          <%= opt %>
+        </label>
+      <% }) %>
+      <button type="submit" class="btn btn-primary">Kirim Jawaban</button>
+    </form>
+  </div>
+<% } else if (progress.status !== 'completed') { %>
+  <div class="card">
+    <form method="POST" action="/learning/module/<%= module.id %>/complete">
+      <button type="submit" class="btn btn-primary">✅ Tandai Selesai</button>
+    </form>
+  </div>
+<% } else { %>
+  <div class="alert alert-success">✅ Modul ini sudah Anda selesaikan.</div>
+<% } %>
+
+<%- include('../partials/footer') %>

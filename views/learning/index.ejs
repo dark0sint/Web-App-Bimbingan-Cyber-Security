@@ -1,0 +1,21 @@
+<%- include('../partials/header') %>
+
+<h1 class="page-title">🗺️ Jalur Pembelajaran Terstruktur</h1>
+<p class="page-sub">Ikuti kurikulum bertahap dari fundamental hingga tingkat lanjut, selaras kebutuhan sertifikasi industri.</p>
+
+<div class="path-grid">
+  <% paths.forEach(p => { %>
+    <a href="/learning/<%= p.id %>" class="path-card">
+      <span class="level-badge level-<%= p.level %>"><%= p.level %></span>
+      <h3><%= p.title %></h3>
+      <p><%= p.description %></p>
+      <% if (p.cert_tag) { %><div class="cert-tag">🏅 Selaras: <%= p.cert_tag %></div><% } %>
+      <div class="progress-bar small">
+        <div class="progress-fill" style="width:<%= p.percent %>%"></div>
+      </div>
+      <div class="path-meta"><%= p.completed %>/<%= p.total %> modul selesai (<%= p.percent %>%)</div>
+    </a>
+  <% }) %>
+</div>
+
+<%- include('../partials/footer') %>

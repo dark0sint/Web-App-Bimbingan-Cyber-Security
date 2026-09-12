@@ -1,0 +1,23 @@
+<%- include('../partials/header') %>
+
+<div class="page-head-row">
+  <h1 class="page-title">🔍 Review Konfigurasi &amp; Laporan Pentest</h1>
+  <% if (!isMentor) { %><a href="/mentor/reviews/new" class="btn btn-primary">+ Kirim untuk Review</a><% } %>
+</div>
+
+<div class="review-list">
+  <% reviews.forEach(r => { %>
+    <a href="/mentor/reviews/<%= r.id %>" class="review-row">
+      <div>
+        <strong><%= r.title %></strong>
+        <% if (isMentor) { %><div class="thread-meta">dari <%= r.student_name %></div><% } %>
+      </div>
+      <span class="badge badge-<%= r.status === 'reviewed' ? 'success' : r.status === 'in_review' ? 'warning' : 'muted' %>">
+        <%= r.status === 'reviewed' ? 'Sudah Direview' : r.status === 'in_review' ? 'Sedang Direview' : 'Menunggu' %>
+      </span>
+    </a>
+  <% }) %>
+  <% if (reviews.length === 0) { %><p class="muted">Belum ada data review.</p><% } %>
+</div>
+
+<%- include('../partials/footer') %>

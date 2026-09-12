@@ -1,0 +1,30 @@
+<%- include('../partials/header') %>
+
+<div class="page-head-row">
+  <h1 class="page-title">🎥 Kelas Live &amp; Sesi Mentor</h1>
+  <% if (user.role === 'mentor' || user.role === 'admin') { %>
+    <a href="/mentor/live-classes/new" class="btn btn-primary">+ Buat Kelas</a>
+  <% } %>
+</div>
+
+<div class="class-list">
+  <% classes.forEach(c => { %>
+    <div class="class-card">
+      <div class="class-date">
+        <%= new Date(c.scheduled_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'short' }) %>
+        <span><%= new Date(c.scheduled_at).toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }) %></span>
+      </div>
+      <div class="class-info">
+        <h3><%= c.title %></h3>
+        <p><%= c.description %></p>
+        <div class="class-mentor">Mentor: <%= c.mentor_name || 'TBA' %></div>
+      </div>
+      <% if (c.meeting_link) { %>
+        <a href="<%= c.meeting_link %>" target="_blank" rel="noopener" class="btn btn-outline">Gabung</a>
+      <% } %>
+    </div>
+  <% }) %>
+  <% if (classes.length === 0) { %><p class="muted">Belum ada kelas live terjadwal.</p><% } %>
+</div>
+
+<%- include('../partials/footer') %>

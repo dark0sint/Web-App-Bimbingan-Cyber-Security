@@ -1,0 +1,26 @@
+<%- include('../partials/header') %>
+
+<div class="auth-wrap">
+  <div class="auth-card">
+    <h2>Masuk ke Akun</h2>
+    <% if (error) { %><div class="alert alert-danger"><%= error %></div><% } %>
+    <form method="POST" action="/auth/login">
+      <label>Email</label>
+      <input type="email" name="email" required placeholder="nama@email.com">
+      <label>Password</label>
+      <input type="password" name="password" required placeholder="••••••••">
+      <button type="submit" class="btn btn-primary btn-block">Masuk</button>
+    </form>
+    <p class="auth-alt">Belum punya akun? <a href="/auth/register">Daftar di sini</a></p>
+    <div class="demo-box">
+      <strong>Akun Demo:</strong>
+      <ul>
+        <li>Siswa: siswa@shadowsecurity.id / Student123!</li>
+        <li>Mentor: mentor@shadowsecurity.id / Mentor123!</li>
+        <li>Admin: admin@shadowsecurity.id / Admin123!</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>

@@ -1,0 +1,59 @@
+<%- include('../partials/header') %>
+
+<a href="/admin" class="back-link">&larr; Kembali ke Panel Admin</a>
+<h1 class="page-title">🧪 Kelola Lab CTF / Sandbox</h1>
+
+<div class="card form-card">
+  <h3>Tambah Lab Baru</h3>
+  <form method="POST" action="/admin/labs/new">
+    <label>Judul</label>
+    <input type="text" name="title" required>
+    <label>Kategori</label>
+    <input type="text" name="category" required placeholder="network / web / linux / forensics / crypto">
+    <label>Kesulitan</label>
+    <select name="difficulty">
+      <option value="easy">easy</option>
+      <option value="medium">medium</option>
+      <option value="hard">hard</option>
+    </select>
+    <label>Deskripsi</label>
+    <textarea name="description" rows="2" required></textarea>
+    <label>Briefing</label>
+    <textarea name="briefing" rows="2" required></textarea>
+    <label>Hint Tool</label>
+    <input type="text" name="tool_hint" placeholder="Contoh: nmap -sV target">
+    <label>Flag Jawaban (plain text, akan di-hash otomatis)</label>
+    <input type="text" name="flag" required placeholder="SSI{contoh_flag}">
+    <label>Poin</label>
+    <input type="number" name="points" value="100">
+    <label>Skill Tag</label>
+    <select name="skill_tag_id">
+      <option value="">- Tanpa Skill Tag -</option>
+      <% skills.forEach(s => { %><option value="<%= s.id %>"><%= s.name %></option><% }) %>
+    </select>
+    <label>Skenario Terminal (format JSON)</label>
+    <textarea name="terminal_scenario" rows="4" placeholder='{"target":"10.10.10.5","files":{"/home/student/notes.txt":"isi file"},"flagLocation":"..."}'></textarea>
+    <button type="submit" class="btn btn-primary">Tambah Lab</button>
+  </form>
+</div>
+
+<table class="admin-table">
+  <thead><tr><th>Judul</th><th>Kategori</th><th>Kesulitan</th><th>Poin</th><th>Aksi</th></tr></thead>
+  <tbody>
+    <% labs.forEach(l => { %>
+      <tr>
+        <td><%= l.title %></td>
+        <td><%= l.category %></td>
+        <td><%= l.difficulty %></td>
+        <td><%= l.points %></td>
+        <td>
+          <form method="POST" action="/admin/labs/<%= l.id %>/delete" class="inline-form" onsubmit="return confirm('Hapus lab ini?')">
+            <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+          </form>
+        </td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>
+
+<%- include('../partials/footer') %>

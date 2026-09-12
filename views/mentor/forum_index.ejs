@@ -1,0 +1,21 @@
+<%- include('../partials/header') %>
+
+<div class="page-head-row">
+  <h1 class="page-title">💬 Forum Diskusi &amp; Q&amp;A</h1>
+  <a href="/mentor/forum/new" class="btn btn-primary">+ Diskusi Baru</a>
+</div>
+
+<div class="thread-list">
+  <% threads.forEach(t => { %>
+    <a href="/mentor/forum/<%= t.id %>" class="thread-row">
+      <div>
+        <strong><%= t.title %></strong>
+        <div class="thread-meta">oleh <%= t.author_name %> · <span class="chip chip-sm"><%= t.category %></span></div>
+      </div>
+      <div class="thread-replies"><%= t.reply_count %> balasan</div>
+    </a>
+  <% }) %>
+  <% if (threads.length === 0) { %><p class="muted">Belum ada diskusi. Jadilah yang pertama bertanya!</p><% } %>
+</div>
+
+<%- include('../partials/footer') %>

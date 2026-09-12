@@ -1,0 +1,27 @@
+<%- include('../partials/header') %>
+
+<h1 class="page-title">🧪 Lab Praktik Virtual (Sandbox &amp; CTF)</h1>
+<p class="page-sub">Coba teknik penetration testing dan analisis kerentanan langsung dari browser — tanpa instalasi, tanpa risiko ke sistem nyata.</p>
+
+<div class="category-filter">
+  <a href="/lab" class="chip <%= activeCategory === 'all' ? 'chip-active' : '' %>">Semua</a>
+  <% categories.forEach(c => { %>
+    <a href="/lab?category=<%= c %>" class="chip <%= activeCategory === c ? 'chip-active' : '' %>"><%= c %></a>
+  <% }) %>
+</div>
+
+<div class="lab-grid">
+  <% labs.forEach(l => { %>
+    <a href="/lab/<%= l.id %>" class="lab-card">
+      <div class="lab-card-top">
+        <span class="diff-badge diff-<%= l.difficulty %>"><%= l.difficulty %></span>
+        <% if (l.solved) { %><span class="badge badge-success">✅ Solved</span><% } %>
+      </div>
+      <h3><%= l.title %></h3>
+      <p><%= l.description %></p>
+      <div class="lab-meta">📁 <%= l.category %> &nbsp;·&nbsp; 🏆 <%= l.points %> poin <% if (l.attempts > 0) { %> &nbsp;·&nbsp; <%= l.attempts %>x percobaan<% } %></div>
+    </a>
+  <% }) %>
+</div>
+
+<%- include('../partials/footer') %>

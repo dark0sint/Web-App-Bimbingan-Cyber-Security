@@ -1,0 +1,49 @@
+<%- include('partials/header') %>
+
+<section class="hero">
+  <h1>Bimbingan Cyber Security<br><span class="accent">Bareng Shadow Security Indonesia</span></h1>
+  <p class="hero-sub">Belajar keamanan siber dari fundamental hingga mahir: materi terstruktur, lab praktik sandbox/CTF aman, bimbingan mentor praktisi, dan pelacakan progres otomatis.</p>
+  <div class="hero-cta">
+    <% if (user) { %>
+      <a href="/dashboard" class="btn btn-primary btn-lg">Lanjut ke Dashboard</a>
+    <% } else { %>
+      <a href="/auth/register" class="btn btn-primary btn-lg">Mulai Belajar Gratis</a>
+      <a href="/auth/login" class="btn btn-outline btn-lg">Sudah Punya Akun</a>
+    <% } %>
+  </div>
+</section>
+
+<section class="stats-bar">
+  <div class="stat-box"><strong><%= stats.totalStudents %></strong><span>Siswa Aktif</span></div>
+  <div class="stat-box"><strong><%= stats.totalPaths %></strong><span>Learning Path</span></div>
+  <div class="stat-box"><strong><%= stats.totalModules %></strong><span>Modul Materi</span></div>
+  <div class="stat-box"><strong><%= stats.totalLabs %></strong><span>Lab CTF/Sandbox</span></div>
+</section>
+
+<section class="features">
+  <h2 class="section-title">Empat Pilar Bimbel Cyber Security Kami</h2>
+  <div class="feature-grid">
+    <div class="feature-card">
+      <div class="feature-icon">🧪</div>
+      <h3>Lab Praktik Virtual Terintegrasi</h3>
+      <p>Sandbox &amp; CTF berbasis browser — coba teknik pentest dan analisis kerentanan tanpa instalasi dan tanpa risiko merusak sistem nyata.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🗺️</div>
+      <h3>Jalur Pembelajaran Terstruktur</h3>
+      <p>Kurikulum bertahap dari fundamental jaringan &amp; OS hingga ethical hacking dan incident response, selaras kebutuhan sertifikasi industri.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🎓</div>
+      <h3>Bimbingan &amp; Evaluasi Mentor</h3>
+      <p>Live class, forum Q&amp;A, dan fitur review konfigurasi/laporan pentest langsung oleh praktisi berpengalaman.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📊</div>
+      <h3>Sistem Pelacakan Progres</h3>
+      <p>Dashboard skor, statistik lab, skill gap analysis, dan rekomendasi latihan otomatis berdasarkan kompetensi yang belum dikuasai.</p>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

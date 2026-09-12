@@ -1,0 +1,46 @@
+<%- include('../partials/header') %>
+
+<a href="/admin" class="back-link">&larr; Kembali ke Panel Admin</a>
+<h1 class="page-title">🗺️ Kelola Learning Path</h1>
+
+<div class="card form-card">
+  <h3>Tambah Learning Path</h3>
+  <form method="POST" action="/admin/paths/new">
+    <label>Judul</label>
+    <input type="text" name="title" required>
+    <label>Deskripsi</label>
+    <textarea name="description" rows="2"></textarea>
+    <label>Level</label>
+    <select name="level">
+      <option value="fundamental">fundamental</option>
+      <option value="intermediate">intermediate</option>
+      <option value="advanced">advanced</option>
+    </select>
+    <label>Tag Sertifikasi (opsional)</label>
+    <input type="text" name="cert_tag" placeholder="Contoh: CompTIA Security+">
+    <label>Urutan</label>
+    <input type="number" name="order_index" value="0">
+    <button type="submit" class="btn btn-primary">Tambah</button>
+  </form>
+</div>
+
+<table class="admin-table">
+  <thead><tr><th>Judul</th><th>Level</th><th>Sertifikasi</th><th>Urutan</th><th>Aksi</th></tr></thead>
+  <tbody>
+    <% paths.forEach(p => { %>
+      <tr>
+        <td><%= p.title %></td>
+        <td><span class="level-badge level-<%= p.level %>"><%= p.level %></span></td>
+        <td><%= p.cert_tag %></td>
+        <td><%= p.order_index %></td>
+        <td>
+          <form method="POST" action="/admin/paths/<%= p.id %>/delete" class="inline-form" onsubmit="return confirm('Hapus path ini beserta seluruh modulnya?')">
+            <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+          </form>
+        </td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>
+
+<%- include('../partials/footer') %>

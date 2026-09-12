@@ -1,0 +1,18 @@
+<%- include('../partials/header') %>
+
+<a href="/mentor/reviews" class="back-link">&larr; Kembali</a>
+<h1 class="page-title">📤 Kirim untuk Direview Mentor</h1>
+
+<div class="card form-card">
+  <form method="POST" action="/mentor/reviews/new" enctype="multipart/form-data">
+    <label>Judul</label>
+    <input type="text" name="title" required placeholder="Contoh: Laporan Pentest Lab SQLi / Konfigurasi Firewall">
+    <label>Deskripsi</label>
+    <textarea name="description" rows="4" placeholder="Jelaskan konteks pekerjaan yang ingin direview mentor..."></textarea>
+    <label>File (opsional: .txt, .md, .pdf, .conf, .log, .json, .yaml, gambar — maks 5MB)</label>
+    <input type="file" name="file">
+    <button type="submit" class="btn btn-primary btn-block">Kirim</button>
+  </form>
+</div>
+
+<%- include('../partials/footer') %>

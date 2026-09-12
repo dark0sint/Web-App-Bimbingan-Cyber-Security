@@ -1,0 +1,45 @@
+<%- include('../partials/header') %>
+
+<a href="/mentor/reviews" class="back-link">&larr; Kembali</a>
+<h1 class="page-title"><%= review.title %></h1>
+
+<div class="card">
+  <p><strong>Siswa:</strong> <%= review.student_name %></p>
+  <p><strong>Deskripsi:</strong> <%= review.description || '-' %></p>
+  <% if (review.file_path) { %>
+    <p><strong>File:</strong> <a href="<%= review.file_path %>" target="_blank">Lihat / Unduh File</a></p>
+  <% } %>
+  <p><strong>Status:</strong>
+    <span class="badge badge-<%= review.status === 'reviewed' ? 'success' : review.status === 'in_review' ? 'warning' : 'muted' %>">
+      <%= review.status %>
+    </span>
+  </p>
+</div>
+
+<% if (review.feedback) { %>
+  <div class="card">
+    <h3>📝 Feedback Mentor <% if (review.mentor_name) { %>(<%= review.mentor_name %>)<% } %></h3>
+    <p><%= review.feedback %></p>
+    <% if (review.score !== null) { %><p><strong>Skor:</strong> <%= review.score %>/100</p><% } %>
+  </div>
+<% } %>
+
+<% if (isMentor) { %>
+  <div class="card form-card">
+    <h3>Beri Feedback</h3>
+    <form method="POST" action="/mentor/reviews/<%= review.id %>/feedback">
+      <label>Feedback</label>
+      <textarea name="feedback" rows="4" required><%= review.feedback || '' %></textarea>
+      <label>Skor (0-100)</label>
+      <input type="number" name="score" min="0" max="100" value="<%= review.score || '' %>">
+      <label>Status</label>
+      <select name="status">
+        <option value="in_review" <%= review.status === 'in_review' ? 'selected' : '' %>>Sedang Direview</option>
+        <option value="reviewed" <%= review.status === 'reviewed' ? 'selected' : '' %>>Selesai Direview</option>
+      </select>
+      <button type="submit" class="btn btn-primary">Simpan Feedback</button>
+    </form>
+  </div>
+<% } %>
+
+<%- include('../partials/footer') %>

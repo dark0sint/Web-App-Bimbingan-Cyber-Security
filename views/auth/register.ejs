@@ -1,0 +1,22 @@
+<%- include('../partials/header') %>
+
+<div class="auth-wrap">
+  <div class="auth-card">
+    <h2>Buat Akun Baru</h2>
+    <% if (error) { %><div class="alert alert-danger"><%= error %></div><% } %>
+    <form method="POST" action="/auth/register">
+      <label>Nama Lengkap</label>
+      <input type="text" name="name" required placeholder="Nama Anda">
+      <label>Email</label>
+      <input type="email" name="email" required placeholder="nama@email.com">
+      <label>Password</label>
+      <input type="password" name="password" required placeholder="Minimal 6 karakter">
+      <label>Konfirmasi Password</label>
+      <input type="password" name="confirm_password" required placeholder="Ulangi password">
+      <button type="submit" class="btn btn-primary btn-block">Daftar Sekarang</button>
+    </form>
+    <p class="auth-alt">Sudah punya akun? <a href="/auth/login">Masuk di sini</a></p>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>

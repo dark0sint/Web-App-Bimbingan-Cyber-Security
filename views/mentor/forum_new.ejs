@@ -1,0 +1,24 @@
+<%- include('../partials/header') %>
+
+<a href="/mentor/forum" class="back-link">&larr; Kembali ke Forum</a>
+<h1 class="page-title">💬 Buat Diskusi Baru</h1>
+
+<div class="card form-card">
+  <form method="POST" action="/mentor/forum/new">
+    <label>Judul Pertanyaan/Topik</label>
+    <input type="text" name="title" required placeholder="Contoh: Bagaimana cara memulai belajar cyber security?">
+    <label>Kategori</label>
+    <select name="category">
+      <option value="umum">Umum</option>
+      <option value="diskusi">Diskusi</option>
+      <option value="lab">Lab / CTF</option>
+      <option value="materi">Materi</option>
+      <option value="karir">Karir</option>
+    </select>
+    <label>Isi (opsional)</label>
+    <textarea name="content" rows="4" placeholder="Jelaskan pertanyaan Anda lebih detail..."></textarea>
+    <button type="submit" class="btn btn-primary btn-block">Posting</button>
+  </form>
+</div>
+
+<%- include('../partials/footer') %>

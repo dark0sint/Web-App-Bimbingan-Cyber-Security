@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %> | Shadow Security Indonesia</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛡️</text></svg>">
+</head>
+<body>
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="/" class="brand">🛡️ Shadow<span>Security</span>.id</a>
+    <button class="nav-toggle" id="navToggle">☰</button>
+    <div class="nav-links" id="navLinks">
+      <% if (user) { %>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/learning">Learning Path</a>
+        <a href="/lab">Lab Praktik</a>
+        <a href="/mentor/live-classes">Kelas Live</a>
+        <a href="/mentor/forum">Forum</a>
+        <a href="/mentor/reviews">Review</a>
+        <% if (user.role === 'admin') { %><a href="/admin">Admin</a><% } %>
+        <span class="nav-user">👤 <%= user.name %> <span class="role-badge role-<%= user.role %>"><%= user.role %></span></span>
+        <form action="/auth/logout" method="POST" class="inline-form">
+          <button type="submit" class="btn btn-ghost btn-sm">Keluar</button>
+        </form>
+      <% } else { %>
+        <a href="/">Beranda</a>
+        <a href="/auth/login" class="btn btn-ghost btn-sm">Masuk</a>
+        <a href="/auth/register" class="btn btn-primary btn-sm">Daftar Gratis</a>
+      <% } %>
+    </div>
+  </div>
+</nav>
+<main class="container">

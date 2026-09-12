@@ -1,0 +1,23 @@
+<%- include('../partials/header') %>
+
+<a href="/learning" class="back-link">&larr; Kembali ke Learning Path</a>
+<h1 class="page-title"><%= path.title %></h1>
+<p class="page-sub"><%= path.description %></p>
+<% if (path.cert_tag) { %><div class="cert-tag">🏅 Selaras kebutuhan sertifikasi: <%= path.cert_tag %></div><% } %>
+
+<div class="module-list">
+  <% modules.forEach((m, i) => { %>
+    <a href="/learning/module/<%= m.id %>" class="module-row">
+      <span class="module-num"><%= i + 1 %></span>
+      <div class="module-info">
+        <strong><%= m.title %></strong>
+        <span class="module-status status-<%= m.status %>">
+          <%= m.status === 'completed' ? '✅ Selesai (' + m.quiz_score + '%)' : m.status === 'in_progress' ? '🕓 Sedang Dipelajari' : '⬜ Belum Dimulai' %>
+        </span>
+      </div>
+    </a>
+  <% }) %>
+  <% if (modules.length === 0) { %><p class="muted">Belum ada modul pada learning path ini.</p><% } %>
+</div>
+
+<%- include('../partials/footer') %>
